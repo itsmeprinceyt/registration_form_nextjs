@@ -126,7 +126,7 @@ export default function RegistrationForm() {
                 },
                 maxLength: {
                   value: 18,
-                  message: "Minimum Length:18",
+                  message: "Maximum Length:18",
                 },
               })}
               placeholder="Password"
