@@ -1,113 +1,176 @@
-import Image from "next/image";
+"use client";
+import { useForm } from 'react-hook-form';
+import { useState } from "react";
+import Image from 'next/image';
 
-export default function Home() {
+export default function RegistrationForm() {
+  const { register, handleSubmit, formState: { errors } } = useForm();
+  const [passwordMatch, setPasswordMatch] = useState(true);
+
+  const onSubmit = (data) => {
+    if (data.password === data.confirmpassword) {
+      setPasswordMatch(true);
+      console.log(data);
+    } else {
+      setPasswordMatch(false);
+    }
+  };
+
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      <div className="z-10 max-w-5xl w-full items-center justify-between font-mono text-sm lg:flex">
-        <p className="fixed left-0 top-0 flex w-full justify-center border-b border-gray-300 bg-gradient-to-b from-zinc-200 pb-6 pt-8 backdrop-blur-2xl dark:border-neutral-800 dark:bg-zinc-800/30 dark:from-inherit lg:static lg:w-auto  lg:rounded-xl lg:border lg:bg-gray-200 lg:p-4 lg:dark:bg-zinc-800/30">
-          Get started by editing&nbsp;
-          <code className="font-mono font-bold">app/page.js</code>
-        </p>
-        <div className="fixed bottom-0 left-0 flex h-48 w-full items-end justify-center bg-gradient-to-t from-white via-white dark:from-black dark:via-black lg:static lg:h-auto lg:w-auto lg:bg-none">
-          <a
-            className="pointer-events-none flex place-items-center gap-2 p-8 lg:pointer-events-auto lg:p-0"
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            By{" "}
-            <Image
-              src="/vercel.svg"
-              alt="Vercel Logo"
-              className="dark:invert"
-              width={100}
-              height={24}
-              priority
-            />
-          </a>
-        </div>
-      </div>
-
-      <div className="relative flex place-items-center before:absolute before:h-[300px] before:w-full sm:before:w-[480px] before:-translate-x-1/2 before:rounded-full before:bg-gradient-radial before:from-white before:to-transparent before:blur-2xl before:content-[''] after:absolute after:-z-20 after:h-[180px] after:w-full sm:after:w-[240px] after:translate-x-1/3 after:bg-gradient-conic after:from-sky-200 after:via-blue-200 after:blur-2xl after:content-[''] before:dark:bg-gradient-to-br before:dark:from-transparent before:dark:to-blue-700 before:dark:opacity-10 after:dark:from-sky-900 after:dark:via-[#0141ff] after:dark:opacity-40 before:lg:h-[360px] z-[-1]">
+    <div className="rounded-md bg-gradient-to-r from-stone-800 to-stone-900 flex flex-col justify-center gap-2 p-2 mt-5 mb-5 items-center w-4/5 h-[700px] shadow-2xl shadow-yellow-800/30 sm:flex-row sm:w-3/5 sm:h-[500px]">
+      <div className="relative rounded-md  w-full h-full sm:1/3">
         <Image
-          className="relative dark:drop-shadow-[0_0_0.3rem_#ffffff70] dark:invert"
-          src="/next.svg"
-          alt="Next.js Logo"
-          width={180}
-          height={37}
-          priority
+          className="rounded-md object-center"
+          src="/sunset.jpg"
+          fill={true}
+          objectFit='cover'
+          alt="Side-Image"
         />
       </div>
-
-      <div className="mb-32 grid text-center lg:max-w-5xl lg:w-full lg:mb-0 lg:grid-cols-4 lg:text-left">
-        <a
-          href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
+      <div className="border-2 border-yellow-500 shadow-md shadow-yellow-300/10 rounded-md flex flex-col w-full h-full p-2">
+        {/*<div class=" p-2 flex justify-center items-center text-xl font-bold text-white text-shadow-yellow" >Registration Form</div>*/}
+        <h1
+          class="font-extrabold text-transparent py-2 flex justify-center items-center text-xl bg-clip-text bg-gradient-to-r from-yellow-500 to-orange-400 text-shadow-yellow "
         >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Docs{" "}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Find in-depth information about Next.js features and API.
-          </p>
-        </a>
+          Registration Form
+        </h1>
+        <form onSubmit={handleSubmit(onSubmit)} className="grid grid-cols-2 gap-2 h-full p-1">
 
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800 hover:dark:bg-opacity-30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Learn{" "}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Learn about Next.js in an interactive course with&nbsp;quizzes!
-          </p>
-        </a>
+          {/*Entering Full Name*/}
+          <div className="relative  flex flex-col justify-center items-start gap-1">
+            <p className="text-xs text-yellow-500 text-shadow-yellow">Enter your Full Name</p>
+            <input
+              className="w-full rounded-sm py-2 text-xs placeholder:text-xs px-2 outline-none"
+              type="text"
+              {...register('fullname', { required: true, maxLength: 25 })}
+              placeholder="Name"
+            />
+            {errors.fullname && <p className="text-red-600 text-xs">You need to fill this!</p>}
+          </div>
 
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Templates{" "}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Explore starter templates for Next.js.
-          </p>
-        </a>
+          {/*Entering username*/}
+          <div className="relative  flex flex-col justify-center items-start gap-1">
+            <p className="text-xs text-yellow-500 text-shadow-yellow">Enter your Username</p>
+            <input
+              className="w-full rounded-sm py-2 text-xs placeholder:text-xs px-2 outline-none"
+              type="text"
+              {...register('username', { required: true, maxLength: 25 })}
+              placeholder="Username"
+            />
+            {errors.username && <p className="text-red-600 text-xs">Choose a username!</p>}
+          </div>
 
-        <a
-          href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Deploy{" "}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50 text-balance`}>
-            Instantly deploy your Next.js site to a shareable URL with Vercel.
-          </p>
-        </a>
+          {/*Entering Email Address*/}
+          <div className="relative  flex flex-col justify-center items-start gap-1 col-span-2">
+            <p className="text-xs text-yellow-500 text-shadow-yellow">Enter your Email</p>
+            <input
+              className="w-full rounded-sm py-2 text-xs placeholder:text-xs px-2 outline-none"
+              type="email"
+              {...register('email', { required: true })}
+              placeholder="Email"
+            />
+            {errors.email && <p className="text-red-600 text-xs">Email is required!</p>}
+          </div>
+
+          {/*Entering Date Of Birth*/}
+          <div className="grid grid-cols-3 gap-1 justify-center items-center col-span-2">
+
+            {/*DATE*/}
+            <div className="relative  flex flex-col justify-center items-center gap-1">
+              <p className="text-xs text-yellow-500 text-shadow-yellow">DATE</p>
+              <input
+                className="w-full rounded-sm py-2 text-xs placeholder:text-xs px-2 outline-none"
+                type="number"
+                {...register("dob.date", { required: true, min: 1, max: 31, maxLength: 2 })}
+                placeholder="DD"
+              />
+              {errors.dob && <p className="text-red-600 text-xs">Invalid Date!</p>}
+            </div>
+
+            {/*MONTH*/}
+            <div className="relative  flex flex-col justify-center items-center gap-1">
+              <p className="text-xs text-yellow-500 text-shadow-yellow">MONTH</p>
+              <input
+                className="w-full rounded-sm py-2 text-xs placeholder:text-xs px-2 outline-none"
+                type="number"
+                {...register("dob.month", { required: true, min: 1, max: 12, maxLength: 2 })}
+                placeholder="MM"
+              />
+              {errors.dob && <p className="text-red-600 text-xs">Invalid Month!</p>}
+            </div>
+
+            {/*YEAR*/}
+            <div className="relative  flex flex-col justify-center items-center gap-1">
+              <p className="text-xs text-yellow-500 text-shadow-yellow">YEAR</p>
+              <input
+                className="w-full rounded-sm py-2 text-xs placeholder:text-xs px-2 outline-none"
+                type="number"
+                {...register("dob.year", { required: true, min: 4, maxLength: 4 })}
+                placeholder="YYYY"
+              />
+              {errors.dob && <p className="text-red-600 text-xs">Invalid Year!</p>}
+            </div>
+          </div>
+
+          {/*Password*/}
+          <div className="relative  flex flex-col justify-center items-start gap-1">
+            <p className="text-xs text-yellow-500 text-shadow-yellow">Create Password</p>
+            <input
+              className="w-full rounded-sm py-2 text-xs placeholder:text-xs px-2 outline-none"
+              type="password"
+              {...register("password", {
+                required: "Create the password!",
+                minLength: {
+                  value: 8,
+                  message: "Minimum Length:8",
+                },
+                maxLength: {
+                  value: 18,
+                  message: "Minimum Length:18",
+                },
+              })}
+              placeholder="Password"
+            />
+            {errors.password && <p className="text-red-600 text-xs">{errors.password.message}</p>}
+            {!passwordMatch && <p className="text-red-600 text-xs">Passwords do not match!</p>}
+          </div>
+
+          {/*Confirm Password*/}
+          <div className="relative  flex flex-col justify-center items-start gap-1">
+            <p className="text-xs text-yellow-500 text-shadow-yellow">Confirm Password</p>
+            <input
+              className="w-full rounded-sm py-2 text-xs placeholder:text-xs px-2 outline-none"
+              type="password"
+              {...register("confirmpassword", {
+                required: "Confirm your password!",
+                minLength: {
+                  value: 8,
+                  message: "Minimum Length:8",
+                },
+                maxLength: {
+                  value: 18,
+                  message: "Confirm your password!",
+                },
+              })}
+              placeholder="Confirm Password"
+            />
+            {errors.confirmpassword && <p className="text-red-600 text-xs">{errors.confirmpassword.message}</p>}
+            {!passwordMatch && <p className="text-red-600 text-xs">Passwords do not match!</p>}
+          </div>
+          <div className="flex justify-center items col-span-2 mt-3">
+            <button type="submit" class=" brightness-150 group hover:shadow-lg hover:shadow-yellow-700/60 transition ease-in-out rounded-md custom-padding bg-gradient-to-br from-yellow-800 via-yellow-600 to-yellow-800 hover:from-yellow-700/40 hover:via-yellow-800 hover:to-yellow-600">
+              <div class="py-1 px-8 backdrop-blur-xl bg-stone-950 rounded-md font-semibold w-full h-full flex justify-center items-center">
+                <div class=" group-hover:text-yellow-700 text-yellow-600">
+                  Register Now
+                </div>
+              </div>
+            </button>
+          </div>
+        </form>
+        <div className="h-[150px] p-2 flex items-center text-[9px] text-center text-white">
+          By accessing the Site, you agree to our Terms and Conditions. If you do not agree, please discontinue use immediately.
+        </div>
       </div>
-    </main>
+    </div>
   );
 }
