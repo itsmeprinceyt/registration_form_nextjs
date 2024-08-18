@@ -51,5 +51,9 @@ If you'd like to contribute to this project, please follow these steps:
 - Push to the branch (git push origin feature-branch).
 - Create a new Pull Request.
 
+## Explanation Video
+
+https://youtu.be/M21wITuvN_c
+
 ## Live Link
 https://registration-form-nextjs.vercel.app/
